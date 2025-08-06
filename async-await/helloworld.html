@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Test DevTools</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 30px;
+        }
+
+        h1 {
+            color: steelblue;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: lightgreen;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 id="titolo">Debug JS Esterno</h1>
+    <button id="btn">Cliccami</button>
+
+
+    <script>
+        //  Sintassi base
+        /*
+    async function nomeFunzione() {
+      const risultato = await operazioneAsincrona();
+      console.log(risultato);
+    }
+    */
+        /*
+            //Esempio
+            // // Funzione asincrona che simula una chiamata API
+            async function ottieniDati() {
+              try {
+                console.log("Invio richiesta all'API...");
+                const risposta = await fetch("https://jsonplaceholder.typicode.com/posts/1");
+                const dati = await risposta.json();  // Anche questo è asincrono!
+                console.log("Dati ricevuti:", dati);
+              } catch (errore) {
+                console.error("Si è verificato un errore:", errore);
+              }
+            }
+        
+            // Chiamata della funzione
+            ottieniDati();
+        */
+
+
+        //differenza promise
+        // Prendere un utente.
+        //Prendere i suoi post.
+        //Prendere i commenti del primo post.
+        /*
+            fetch('https://jsonplaceholder.typicode.com/users/1')
+              .then(response => response.json())
+              .then(user => {
+                console.log('Utente:', user);
+                // Ora prendo i post dell'utente
+                return fetch(`https://jsonplaceholder.typicode.com/posts?userId=${user.id}`);
+              })
+              .then(response => response.json())
+              .then(posts => {
+                console.log('Post:', posts);
+                const primoPost = posts[0];
+                // Ora prendo i commenti del primo post
+                return fetch(`https://jsonplaceholder.typicode.com/comments?postId=${primoPost.id}`);
+              })
+              .then(response => response.json())
+              .then(comments => {
+                console.log('Commenti del primo post:', comments);
+              })
+              .catch(error => {
+                console.error('Errore:', error);
+              });
+        */
+
+
+        //stesso esempio con async
+        async function prendiDati() {
+            try {
+                // Prendi un utente
+                const userResponse = await fetch('https://jsonplaceholder.typicode.com/users/1');
+                const user = await userResponse.json();
+                console.log('Utente:', user);
+
+                // Prendi i post dell'utente
+                const postsResponse = await fetch(`https://jsonplaceholder.typicode.com/posts?userId=${user.id}`);
+                const posts = await postsResponse.json();
+                console.log('Post:', posts);
+
+                // Prendi i commenti del primo post
+                const primoPost = posts[0];
+                const commentsResponse = await fetch(`https://jsonplaceholder.typicode.com/comments?postId=${primoPost.id}`);
+                const comments = await commentsResponse.json();
+                console.log('Commenti del primo post:', comments);
+
+            } catch (error) {
+                console.error('Errore:', error);
+            }
+        }
+
+        // Chiamata della funzione
+        prendiDati();
+
+
+
+
+    </script>
+</body>
+
+</html>
