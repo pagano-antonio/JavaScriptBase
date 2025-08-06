@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Cookie con input</title>
+</head>
+
+<body>
+
+    <h2 id="output">Benvenuto!</h2>
+
+    <form id="form">
+        <input type="text" id="nome" placeholder="Inserisci il tuo nome" required>
+        <button type="submit">Salva</button>
+    </form>
+
+    <button id="cancella">Cancella cookie</button>
+
+    <script>
+        // Funzione per leggere un cookie
+        function getCookie(n) {
+            const cookies = document.cookie.split("; ");
+            for (let c of cookies) {
+
+                if (c.startsWith(n + "=")) {
+                    return c.split("=")[1];
+                }
+            }
+            return "";
+        }
+
+        // Funzione per cancellare un cookie
+        function deleteCookie(n) {
+            document.cookie = n + "=; max-age=0; path=/";
+        }
+
+        // Quando si invia il form
+        document.getElementById("form").addEventListener("submit", function (e) {
+            e.preventDefault();
+            const nome = document.getElementById("nome").value;
+            //per far rimanere il cookies devi avviare il server
+            //altrimenti non lo salva
+            // Imposta il cookie con durata di 1 giorno
+            document.cookie = "nomeUtente=" + encodeURIComponent(nome) + "; max-age=86400; path=/";
+
+            document.getElementById("output").textContent = "Ciao " + nome + "!";
+        });
+
+        // Mostra il nome salvato nel cookie (se presente)
+        const nomeSalvato = getCookie("nomeUtente");
+        if (nomeSalvato) {
+            document.getElementById("output").textContent = "Ciao " + decodeURIComponent(nomeSalvato) + "!";
+        }
+
+        // Quando si clicca su "Cancella"
+        document.getElementById("cancella").addEventListener("click", function () {
+            deleteCookie("nomeUtente");
+            document.getElementById("output").textContent = "Benvenuto!";
+        });
+    </script>
+
+</body>
+
+</html>
