@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Calcolatrice semplice</title>
+</head>
+
+<body>
+    <h1>Calcolatrice con input utente</h1>
+    <button onclick="calcola()">Fai i calcoli</button>
+
+    <script>
+        function calcola() {
+            // Chiedi input
+            let input1 = prompt("Inserisci il primo numero:");
+            let input2 = prompt("Inserisci il secondo numero:");
+
+            // Converto in numero
+            let num1 = Number(input1);
+            let num2 = Number(input2);
+
+            // Mostro i valori inseriti e convertiti
+            console.log("Input 1:", input1, "->", num1);
+            console.log("Input 2:", input2, "->", num2);
+
+            // Verifico se almeno uno dei due non è un numero
+            if (isNaN(num1) || isNaN(num2)) {
+                console.log("Errore: uno dei due valori non è un numero valido!");
+                alert("Errore: hai inserito un valore non numerico!");
+                return;
+            }
+
+            // Calcoli
+            let s = num1 + num2;
+            let m = num1 * num2;
+            let d = num1 / num2;
+
+            // Output in console
+            console.log("Somma:", somma);
+            console.log("Moltiplicazione:", moltiplicazione);
+            console.log("Divisione:", divisione);
+
+            // Mostra anche con alert
+            alert(
+                `Risultati:\n` +
+                `Somma: ${s}\n` +
+                `Moltiplicazione: ${m}\n` +
+                `Divisione: ${d}`
+            );
+        }
+    </script>
+</body>
+
+</html>
